@@ -19,12 +19,10 @@ public class MyNetworkManager : NetworkManager {
 		InvokeRepeating("ConnectionWait", 0.01f, 0.01f);
 	}
 
-
 	public override void OnClientConnect (NetworkConnection conn){
 		Debug.Log (Time.timeSinceLevelLoad + " Client is connected to IP: " + conn.address);
 		CancelInvoke();
 	}
-
 
 	void ConnectionWait (){
 		Debug.Log (".");

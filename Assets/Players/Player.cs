@@ -20,13 +20,26 @@ public class Player : NetworkBehaviour {
 		if (!isLocalPlayer) {
 			return;
 		}
-		float h = CrossPlatformInputManager.GetAxis("Horizontal");
-        float v = CrossPlatformInputManager.GetAxis("Vertical");
 
-        move = (v*Vector3.forward + h*Vector3.right).normalized;
-		m_Rigidbody.AddForce(move);
+		// regular move
+		move.x = CrossPlatformInputManager.GetAxis("Horizontal");
+		move.y = 0f;
+		move.z = CrossPlatformInputManager.GetAxis("Vertical");
+
+		transform.Translate (move);
+
+		// move with inertion
+//		float h = CrossPlatformInputManager.GetAxis("Horizontal");
+//        float v = CrossPlatformInputManager.GetAxis("Vertical");
+//
+//        move = (v*Vector3.forward + h*Vector3.right).normalized;
+//		m_Rigidbody.AddForce(move);
 	}
 
+	public override void OnStartLocalPlayer (){
+		GetComponentInChildren<Camera>().enabled = true;
+		GetComponentInChildren<AudioListener>().enabled = true;
+	}
 //    private void FixedUpdate()
 //    {
 //        // Call the Move function of the ball controller
